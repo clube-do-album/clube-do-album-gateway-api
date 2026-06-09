@@ -8,5 +8,6 @@ public record GatewayProperties(
     String catalogApiUrl,
     String ratingsApiUrl,
     String rankingApiUrl,
-    String feedApiUrl
+    String feedApiUrl,
+    String socialApiUrl
 ) {}

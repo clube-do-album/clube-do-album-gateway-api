@@ -3,6 +3,7 @@ package br.com.clubedoalbum.gateway.controller;
 import br.com.clubedoalbum.gateway.config.GatewayProperties;
 import br.com.clubedoalbum.gateway.service.ProxyService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,7 +64,7 @@ public class ProxyController {
     return forward(HttpMethod.POST, gatewayProperties.ratingsApiUrl(), "/ratings", body, request);
   }
 
-  @GetMapping({"/ratings/albums/{albumId}", "/ratings/users/{userId}"})
+  @GetMapping({"/ratings/albums/{albumId}", "/ratings/users/{userId}", "/ratings/users/{userId}/public"})
   public ResponseEntity<String> getRatings(HttpServletRequest request) {
     return forward(HttpMethod.GET, gatewayProperties.ratingsApiUrl(), request.getRequestURI(), null, request);
   }
@@ -76,6 +77,21 @@ public class ProxyController {
   @GetMapping({"/feed", "/feed/users/{userId}", "/feed/albums/{albumId}"})
   public ResponseEntity<String> getFeed(HttpServletRequest request) {
     return forward(HttpMethod.GET, gatewayProperties.feedApiUrl(), request.getRequestURI(), null, request);
+  }
+
+  @PostMapping("/follows/{userId}")
+  public ResponseEntity<String> followUser(@RequestBody(required = false) String body, HttpServletRequest request) {
+    return forward(HttpMethod.POST, gatewayProperties.socialApiUrl(), request.getRequestURI(), body, request);
+  }
+
+  @DeleteMapping("/follows/{userId}")
+  public ResponseEntity<String> unfollowUser(HttpServletRequest request) {
+    return forward(HttpMethod.DELETE, gatewayProperties.socialApiUrl(), request.getRequestURI(), null, request);
+  }
+
+  @GetMapping({"/follows/following", "/follows/followers"})
+  public ResponseEntity<String> getFollows(HttpServletRequest request) {
+    return forward(HttpMethod.GET, gatewayProperties.socialApiUrl(), request.getRequestURI(), null, request);
   }
 
   private ResponseEntity<String> forward(

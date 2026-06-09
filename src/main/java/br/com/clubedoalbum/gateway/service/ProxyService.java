@@ -25,7 +25,13 @@ public class ProxyService {
       HttpHeaders.CONTENT_LENGTH,
       HttpHeaders.TRANSFER_ENCODING,
       HttpHeaders.CONNECTION,
-      HttpHeaders.CONTENT_ENCODING
+      HttpHeaders.CONTENT_ENCODING,
+      HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,
+      HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS,
+      HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS,
+      HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS,
+      HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,
+      HttpHeaders.ACCESS_CONTROL_MAX_AGE
   );
 
   private final RestClient.Builder restClientBuilder;

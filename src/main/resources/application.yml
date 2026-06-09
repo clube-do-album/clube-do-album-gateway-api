@@ -11,6 +11,7 @@ services:
   ratings-api-url: ${RATINGS_API_URL:http://localhost:8082}
   ranking-api-url: ${RANKING_API_URL:http://localhost:3002}
   feed-api-url: ${FEED_API_URL:http://localhost:3003}
+  social-api-url: ${SOCIAL_API_URL:http://localhost:3004}
 
 app:
   cors:

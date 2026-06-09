@@ -37,6 +37,7 @@ CATALOG_API_URL=http://localhost:3001
 RATINGS_API_URL=http://localhost:8082
 RANKING_API_URL=http://localhost:3002
 FEED_API_URL=http://localhost:3003
+SOCIAL_API_URL=http://localhost:3004
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 JWT_SECRET=clube-do-album-local-development-secret-key-change-me
 ```
@@ -49,6 +50,7 @@ CATALOG_API_URL=http://clube-do-album-catalog-api:3001
 RATINGS_API_URL=http://clube-do-album-ratings-api:8082
 RANKING_API_URL=http://clube-do-album-ranking-worker:3002
 FEED_API_URL=http://clube-do-album-feed-worker:3003
+SOCIAL_API_URL=http://clube-do-album-social-api:3004
 JWT_SECRET=clube-do-album-local-development-secret-key-change-me
 ```
 
@@ -80,6 +82,9 @@ GET /rankings/{albumId}
 GET /feed
 GET /feed/albums/{albumId}
 GET /ratings/albums/{albumId}
+GET /ratings/users/{userId}/public
+GET /follows/following
+GET /follows/followers
 ```
 
 As demais rotas exigem `Authorization: Bearer <token>`.
@@ -114,6 +119,7 @@ POST /albums/import
 POST /ratings
 GET /ratings/albums/{albumId}
 GET /ratings/users/{userId}
+GET /ratings/users/{userId}/public
 ```
 
 ### Ranking
@@ -129,6 +135,15 @@ GET /rankings/{albumId}
 GET /feed
 GET /feed/users/{userId}
 GET /feed/albums/{albumId}
+```
+
+### Social
+
+```http
+POST /follows/{userId}
+DELETE /follows/{userId}
+GET /follows/following
+GET /follows/followers
 ```
 
 ## Docker
@@ -150,6 +165,7 @@ docker run -d --name clube-do-album-gateway-api \
   -e RATINGS_API_URL=http://clube-do-album-ratings-api:8082 \
   -e RANKING_API_URL=http://clube-do-album-ranking-worker:3002 \
   -e FEED_API_URL=http://clube-do-album-feed-worker:3003 \
+  -e SOCIAL_API_URL=http://clube-do-album-social-api:3004 \
   -e JWT_SECRET=clube-do-album-local-development-secret-key-change-me \
   -p 3000:3000 \
   clube-do-album-gateway-api
@@ -157,4 +173,4 @@ docker run -d --name clube-do-album-gateway-api \
 
 ## Status atual
 
-Gateway criado para centralizar chamadas para Identity, Catalog, Ratings, Ranking e Feed, com validacao JWT nas rotas protegidas.
+Gateway criado para centralizar chamadas para Identity, Catalog, Ratings, Ranking, Feed e Social, com validacao JWT nas rotas protegidas.

@@ -69,7 +69,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
           || path.startsWith("/rankings/")
           || path.equals("/feed")
           || path.startsWith("/feed/albums/")
-          || path.startsWith("/ratings/albums/");
+          || path.equals("/users")
+          || path.startsWith("/users/")
+          || path.startsWith("/ratings/albums/")
+          || (path.startsWith("/ratings/users/") && path.endsWith("/public"));
     }
 
     return false;
