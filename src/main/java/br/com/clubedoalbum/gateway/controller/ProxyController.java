@@ -64,7 +64,7 @@ public class ProxyController {
     return forward(HttpMethod.POST, gatewayProperties.ratingsApiUrl(), "/ratings", body, request);
   }
 
-  @GetMapping({"/ratings/albums/{albumId}", "/ratings/users/{userId}", "/ratings/users/{userId}/public"})
+  @GetMapping({"/ratings/albums/{albumId}", "/ratings/users/{userId}", "/ratings/users/{userId}/summary", "/ratings/users/{userId}/public"})
   public ResponseEntity<String> getRatings(HttpServletRequest request) {
     return forward(HttpMethod.GET, gatewayProperties.ratingsApiUrl(), request.getRequestURI(), null, request);
   }
