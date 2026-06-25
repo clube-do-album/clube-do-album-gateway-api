@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -92,6 +93,16 @@ public class ProxyController {
   @GetMapping({"/follows/following", "/follows/followers"})
   public ResponseEntity<String> getFollows(HttpServletRequest request) {
     return forward(HttpMethod.GET, gatewayProperties.socialApiUrl(), request.getRequestURI(), null, request);
+  }
+
+  @GetMapping({"/notifications", "/notifications/unread-count"})
+  public ResponseEntity<String> getNotifications(HttpServletRequest request) {
+    return forward(HttpMethod.GET, gatewayProperties.notificationApiUrl(), request.getRequestURI(), null, request);
+  }
+
+  @PatchMapping({"/notifications/{id}/read", "/notifications/read-all"})
+  public ResponseEntity<String> updateNotifications(@RequestBody(required = false) String body, HttpServletRequest request) {
+    return forward(HttpMethod.PATCH, gatewayProperties.notificationApiUrl(), request.getRequestURI(), body, request);
   }
 
   private ResponseEntity<String> forward(
